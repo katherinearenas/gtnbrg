@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Traveller model
-class Traveller extends Model {}
+// create our Location model
+class Book extends Model {}
 
-// create fields/columns for Traveller model
-Traveller.init(
+// create fields/columns for Location model
+Book.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,17 +13,26 @@ Traveller.init(
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    book_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email: {
+    ISBN: {
       type: DataTypes.STRING,
-      allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true
-      }
+      allowNull: false
+    },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    genre: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {
@@ -31,8 +40,8 @@ Traveller.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'traveller'
+    modelName: 'book'
   }
 );
 
-module.exports = Traveller;
+module.exports = Book;

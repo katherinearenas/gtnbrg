@@ -36,15 +36,15 @@ Member.init(
     library: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'book',
+        model: 'Library',
         key: 'id',
         unique: false
       }
     },
-    clubs_list: {
+    membership: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'club',
+        model: 'Memberlist',
         key: 'id',
         unique: false
       }
@@ -55,7 +55,7 @@ Member.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'trip'
+    modelName: 'member'
   }
 );
 

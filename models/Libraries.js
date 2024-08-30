@@ -20,7 +20,8 @@ Library.init(
     books: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: true
+    }
   },
   {
     sequelize,

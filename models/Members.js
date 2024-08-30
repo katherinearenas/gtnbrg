@@ -2,10 +2,10 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our Trip model
-class Trip extends Model {}
+class Member extends Model {}
 
 // create fields/columns for Trip model
-Trip.init(
+Member.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,27 +13,38 @@ Trip.init(
       primaryKey: true,
       autoIncrement: true
     },
-    trip_budget: {
-      type: DataTypes.DECIMAL(10, 2),
+    name: {
+      type: DataTypes.VARCHAR(50),
+      unique: true,
       allowNull: true
     },
-    traveller_amount: {
-      type: DataTypes.INTEGER,
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 1
+      validate: {
+        isEmail: true
+      }
     },
-    traveller_id: {
+    password: {
+      type: DataTypes.VARCHAR(50),
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        len: [8, 50]
+      }
+    },
+    library: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'traveller',
+        model: 'book',
         key: 'id',
         unique: false
       }
     },
-    location_id: {
+    clubs_list: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'location',
+        model: 'club',
         key: 'id',
         unique: false
       }
@@ -48,4 +59,4 @@ Trip.init(
   }
 );
 
-module.exports = Trip;
+module.exports = Member;

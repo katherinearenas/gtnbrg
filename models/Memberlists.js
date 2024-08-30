@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Traveller model
-class Club extends Model {}
+// create our Location model
+class Library extends Model {}
 
-// create fields/columns for Traveller model
-Club.init(
+// create fields/columns for Location model
+Library.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,36 +13,23 @@ Club.init(
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    owner: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    host: {
+    books: {
       type: DataTypes.STRING,
-      allowNull: false,
       unique: true,
-      references: {
-        model: 'member',
-        key: 'id',
-        unique: true
-      }
-    },
-    description: {
-      type: DataTypes.STRING,
       allowNull: false
-    },
-    member_list: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+    }
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'club'
+    modelName: 'book'
   }
 );
 
-module.exports = Club;
+module.exports = Library;

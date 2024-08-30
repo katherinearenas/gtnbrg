@@ -42,8 +42,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update a club
-
 // DELETE a club
 router.delete('/:id', async (req, res) => {
   try {

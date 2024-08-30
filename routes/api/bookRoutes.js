@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Location, Traveller, Trip } = require('../../models');
+const { Book, Club, Member } = require('../../models');
 
 // GET all locations
 router.get('/', async (req, res) => {
   try {
-    const locationData = await Location.findAll();
-    res.status(200).json(locationData);
+    const bookData = await Book.findAll();
+    res.status(200).json(bookData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -14,17 +14,17 @@ router.get('/', async (req, res) => {
 // GET a single location
 router.get('/:id', async (req, res) => {
   try {
-    const locationData = await Location.findByPk(req.params.id, {
+    const bookData = await Book.findByPk(req.params.id, {
       // JOIN with travellers, using the Trip through table
-      include: [{ model: Traveller, through: Trip, as: 'location_travellers' }]
+      // include: [{ model: Traveller, through: Trip, as: 'location_travellers' }]
     });
 
-    if (!locationData) {
-      res.status(404).json({ message: 'No location found with this id!' });
+    if (!bookData) {
+      res.status(404).json({ message: 'No book found with this id!' });
       return;
     }
 
-    res.status(200).json(locationData);
+    res.status(200).json(bookData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -33,8 +33,8 @@ router.get('/:id', async (req, res) => {
 // CREATE a location
 router.post('/', async (req, res) => {
   try {
-    const locationData = await Location.create(req.body);
-    res.status(200).json(locationData);
+    const bookData = await Book.create(req.body);
+    res.status(200).json(bookData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -43,13 +43,13 @@ router.post('/', async (req, res) => {
 // DELETE a location
 router.delete('/:id', async (req, res) => {
   try {
-    const locationData = await Location.destroy({
+    const bookData = await Book.destroy({
       where: {
         id: req.params.id
       }
     });
 
-    if (!locationData) {
+    if (!bookData) {
       res.status(404).json({ message: 'No location found with this id!' });
       return;
     }

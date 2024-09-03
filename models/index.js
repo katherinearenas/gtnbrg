@@ -1,10 +1,10 @@
 const Book = require('./Books');
 const Club = require('./Clubs');
-const Member = require('./Members');
+const User = require('./Users');
 const Library = require('./Libraries');
 const Memberlist = require('./Memberlists')
 
-Book.belongsToMany(Member, {
+Book.belongsToMany(User, {
 
   // Define the third table needed to store the foreign keys
   through: {
@@ -30,7 +30,7 @@ Book.belongsToMany(Club, {
   as: 'reading_list'
 });
 
-Club.belongsToMany(Member, {
+Club.belongsToMany(User, {
   through: {
     model: Memberlist,
     unique: false
@@ -39,7 +39,7 @@ Club.belongsToMany(Member, {
 });
 
 
-Member.belongsToMany(Club, {
+User.belongsToMany(Club, {
 
   through: {
     model: Memberlist,
@@ -48,4 +48,4 @@ Member.belongsToMany(Club, {
   as: 'membership'
 });
 
-module.exports = { Book, Club, Member, Library };
+module.exports = { Book, Club, User, Library };

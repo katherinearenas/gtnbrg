@@ -14,7 +14,8 @@ Member.init(
       autoIncrement: true
     },
     name: {
-      type: DataTypes.VARCHAR(50),
+
+      type: DataTypes.STRING,
       unique: true,
       allowNull: true
     },
@@ -26,7 +27,9 @@ Member.init(
       }
     },
     password: {
-      type: DataTypes.VARCHAR(50),
+
+      type: DataTypes.STRING,
+
       allowNull: false,
       validate: {
         isAlphanumeric: true,
@@ -35,12 +38,16 @@ Member.init(
     },
     library: {
       type: DataTypes.INTEGER,
+
+      allowNull: true,
       references: {
         model: 'Library',
         key: 'id',
         unique: false
       }
     },
+
+
     membership: {
       type: DataTypes.INTEGER,
       references: {

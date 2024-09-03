@@ -18,20 +18,24 @@ Club.init(
       allowNull: false
     },
     host: {
-      type: DataTypes.INTEGER,
+
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: false,
+      unique: true,
       references: {
         model: 'member',
         key: 'id',
-        unique: false
+        unique: true
+
       }
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    members_list: {
+
+    member_list: {
+
       type: DataTypes.INTEGER,
       allowNull: false
     },

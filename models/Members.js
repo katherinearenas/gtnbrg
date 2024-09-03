@@ -14,6 +14,7 @@ Member.init(
       autoIncrement: true
     },
     name: {
+
       type: DataTypes.STRING,
       unique: true,
       allowNull: true
@@ -26,7 +27,9 @@ Member.init(
       }
     },
     password: {
+
       type: DataTypes.STRING,
+
       allowNull: false,
       validate: {
         isAlphanumeric: true,
@@ -35,6 +38,7 @@ Member.init(
     },
     library: {
       type: DataTypes.INTEGER,
+
       allowNull: true,
       references: {
         model: 'Library',
@@ -42,7 +46,9 @@ Member.init(
         unique: false
       }
     },
-    memberships: {
+
+
+    membership: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Memberlist',

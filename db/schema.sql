@@ -11,5 +11,5 @@ CREATE TABLE library(
 );
 CREATE TABLE club(
 );
-CREATE TABLE member(
+CREATE TABLE user(
 );

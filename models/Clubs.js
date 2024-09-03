@@ -23,7 +23,7 @@ Club.init(
       allowNull: false,
       unique: true,
       references: {
-        model: 'member',
+        model: 'user',
         key: 'id',
         unique: true
 

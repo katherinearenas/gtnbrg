@@ -1,25 +1,39 @@
-const Traveller = require('./Traveller');
-const Location = require('./Location');
-const Trip = require('./Trip');
+const Book = require('./Books');
+const Club = require('./Clubs');
+const Member = require('./Members');
+const Library = require('./Libraries');
+const Memberlist = require('./Memberlists')
 
-Traveller.belongsToMany(Location, {
-  // Define the third table needed to store the foreign keys
+Book.belongsToMany(Member, {
   through: {
-    model: Trip,
+    model: Library,
     unique: false
   },
-  // Define an alias for when data is retrieved
-  as: 'planned_trips'
+  as: 'collection'
 });
 
-Location.belongsToMany(Traveller, {
-  // Define the third table needed to store the foreign keys
+Book.belongsToMany(Club, {
   through: {
-    model: Trip,
+    model: Library,
     unique: false
   },
-  // Define an alias for when data is retrieved
-  as: 'location_travellers'
+  as: 'reading_list'
 });
 
-module.exports = { Traveller, Location, Trip };
+Club.belongsToMany(Member, {
+  through: {
+    model: Memberlist,
+    unique: false
+  },
+  as: 'member_list'
+});
+
+Member.belongsToMany(Club, {
+  through: {
+    model: Memberlist,
+    unique: false
+  },
+  as: 'membership'
+});
+
+module.exports = { Book, Club, Member, Library };

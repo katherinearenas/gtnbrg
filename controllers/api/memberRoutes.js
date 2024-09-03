@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a single member
+// GET a member
 router.get('/:id', async (req, res) => {
   try {
     const memberData = await Member.findByPk(req.params.id, {
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// CREATE a traveller
+// CREATE a member
 router.post('/', async (req, res) => {
   try {
     const memberData = await Member.create(req.body);
@@ -40,7 +40,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE a traveller
+
+// DELETE a member
 router.delete('/:id', async (req, res) => {
   try {
     const memberData = await Member.destroy({

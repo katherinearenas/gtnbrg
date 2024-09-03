@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// CREATE a location
+// CREATE a book
 router.post('/', async (req, res) => {
   try {
     const bookData = await Book.create(req.body);
@@ -40,7 +40,33 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE a location
+router.put('/:isbn', (req, res) => {
+  // Calls the update method on the Book model
+  Book.update(
+    {
+      // All the fields you can update and the data attached to the request body.
+      title: req.body.title,
+      author: req.body.author,
+      isbn: req.body.isbn,
+      pages: req.body.pages,
+      edition: req.body.edition,
+      is_paperback: req.body.is_paperback,
+    },
+    {
+      // Gets the books based on the isbn given in the request parameters
+      where: {
+        isbn: req.params.isbn,
+      },
+    }
+  )
+    .then((updatedBook) => {
+      // Sends the updated book as a json response
+      res.json(updatedBook);
+    })
+    .catch((err) => res.json(err));
+});
+
+// DELETE a book
 router.delete('/:id', async (req, res) => {
   try {
     const bookData = await Book.destroy({

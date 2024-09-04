@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Max",
+    "email": "max@gmail.com",
+    "password": "supersecure"
+  },
+  {
+    "name": "Kat",
+    "email": "kat@hotmail.com",
+    "password": "goodpassword"
+  },
+  {
+    "name": "Rick",
+    "email": "rick@hotmail.com",
+    "password": "drowssap"
+  },
+  {
+    "name": "Chad",
+    "email": "Chad@hotmail.com",
+    "password": "cantbehacked"
+  }
+]

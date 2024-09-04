@@ -1,10 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Trip model
-class Member extends Model {}
+class Member extends Model { }
 
-// create fields/columns for Trip model
 Member.init(
   {
     id: {
@@ -14,10 +12,9 @@ Member.init(
       autoIncrement: true
     },
     name: {
-
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -27,34 +24,22 @@ Member.init(
       }
     },
     password: {
-
       type: DataTypes.STRING,
-
       allowNull: false,
       validate: {
         isAlphanumeric: true,
         len: [8, 50]
       }
     },
-    library: {
+    collection: {
       type: DataTypes.INTEGER,
-
       allowNull: true,
-      references: {
-        model: 'Library',
-        key: 'id',
-        unique: false
-      }
     },
 
 
-    membership: {
+    memberships: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Memberlist',
-        key: 'id',
-        unique: false
-      }
+      allowNull: true,
     }
   },
   {

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book, Club, Member } = require('../../models');
+const { Book } = require('../../models');
 
 // GET all locations
 router.get('/', async (req, res) => {
@@ -47,7 +47,6 @@ router.put('/:isbn', (req, res) => {
       // All the fields you can update and the data attached to the request body.
       title: req.body.title,
       author: req.body.author,
-      isbn: req.body.isbn,
       pages: req.body.pages,
       edition: req.body.edition,
       is_paperback: req.body.is_paperback,

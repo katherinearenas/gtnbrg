@@ -17,11 +17,11 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    ISBN: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
-    },
+    // ISBN: {
+    //   type: DataTypes.STRING,
+    //   unique: true,
+    //   allowNull: false
+    // },
     author: {
       type: DataTypes.STRING,
       allowNull: false

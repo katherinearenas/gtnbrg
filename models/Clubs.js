@@ -23,14 +23,14 @@ Club.init(
       allowNull: false,
       unique: true,
       references: {
-        model: 'user',
+        model: 'member',
         key: 'id',
         unique: true
 
       }
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
 

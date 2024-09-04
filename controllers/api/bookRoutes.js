@@ -75,11 +75,11 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!bookData) {
-      res.status(404).json({ message: 'No location found with this id!' });
+      res.status(404).json({ message: 'No book found with this id!' });
       return;
     }
 
-    res.status(200).json(locationData);
+    res.status(200).json(bookData);
   } catch (err) {
     res.status(500).json(err);
   }

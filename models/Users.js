@@ -17,7 +17,7 @@ User.init(
 
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -36,25 +36,15 @@ User.init(
         len: [8, 50]
       }
     },
-    library: {
+    collection: {
       type: DataTypes.INTEGER,
-
       allowNull: true,
-      references: {
-        model: 'Library',
-        key: 'id',
-        unique: false
-      }
     },
 
 
-    membership: {
+    memberships: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Memberlist',
-        key: 'id',
-        unique: false
-      }
+      allowNull: true,
     }
   },
   {

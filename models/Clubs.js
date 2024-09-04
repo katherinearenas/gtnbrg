@@ -19,7 +19,7 @@ Club.init(
     },
     host: {
 
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
       references: {
@@ -34,10 +34,10 @@ Club.init(
       allowNull: false
     },
 
-    member_list: {
+    members_list: {
 
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
   },
   {

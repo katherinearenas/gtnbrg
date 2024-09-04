@@ -49,13 +49,13 @@ router.put('/:isbn', (req, res) => {
       author: req.body.author,
       pages: req.body.pages,
       edition: req.body.edition,
-      is_paperback: req.body.is_paperback,
+      is_paperback: req.body.is_paperback
     },
     {
       // Gets the books based on the isbn given in the request parameters
       where: {
-        isbn: req.params.isbn,
-      },
+        isbn: req.params.isbn
+      }
     }
   )
     .then((updatedBook) => {
@@ -79,7 +79,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(locationData);
+    res.status(200).json(bookData);
   } catch (err) {
     res.status(500).json(err);
   }

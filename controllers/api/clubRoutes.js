@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Club } = require('../../models');
 
-// Get all clubs
 router.get('/', async (req, res) => {
   try {
     const clubData = await Club.findAll();

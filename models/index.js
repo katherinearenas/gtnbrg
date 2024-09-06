@@ -2,9 +2,10 @@ const Book = require('./Books');
 const Club = require('./Clubs');
 const Member = require('./Members');
 const Library = require('./Libraries');
-const Memberlist = require('./Memberlists');
+const Memberlist = require('./Memberlists')
 
 Book.belongsToMany(Club, {
+
   through: {
     model: Library,
     unique: false
@@ -12,6 +13,7 @@ Book.belongsToMany(Club, {
   as: 'reading_list',
   foreignKey: 'book_id',
   otherKey: 'club_id'
+
 });
 
 Club.belongsToMany(Book, {
@@ -34,10 +36,16 @@ Club.belongsToMany(Member, {
   through: {
     model: Memberlist,
     unique: false
-  },
-  as: 'member_list',
-  foreignKey: 'club_id',
-  otherKey: 'user_id'
+
+}
+});
+
+Member.belongsToMany(Club, {
+  through: {
+    model: Memberlist,
+    unique: false
+
+}
 });
 
 

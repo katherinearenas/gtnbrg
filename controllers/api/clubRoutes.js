@@ -4,12 +4,14 @@ const { Club } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const clubData = await Club.findAll();
-    res.status(200).json(clubData);
+    
+    console.log('Clubs data:', clubData);
+
+    res.render('clubs', { clubs: clubData });
   } catch (err) {
-    res.status(500).json(err);
+    console.error('Error fetching clubs:', err);
+    res.status(500).json({ message: 'Failed to fetch clubs', error: err.message });
   }
-  // find all categories
-  // be sure to include its associated Products
 });
 
 // get club by id
@@ -17,7 +19,6 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const clubData = await Club.findByPk(req.params.id, {
-      // include: [Product]
     });
 
     if (!clubData) {

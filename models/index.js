@@ -27,7 +27,7 @@ Club.belongsToMany(Book, {
 });
 
 Club.belongsTo(Member, {
-  foreignKey: 'hostId',
+  foreignKey: 'host',
   as: 'Host'
 });
 

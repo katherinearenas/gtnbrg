@@ -62,20 +62,19 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
-
   try {
+    const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await Member.create({
-      username,
+    const newMember = await Member.create({
+      name: username,
       email,
       password: hashedPassword
     });
-    res.redirect('/login');
+    res.json({ success: true, message: 'Signup successful' });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Error signing up');
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error', error: error.message });
   }
 });
 

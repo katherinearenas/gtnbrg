@@ -7,20 +7,24 @@ class Memberist extends Model {}
 // create fields/columns for Location model
 Memberist.init(
   {
-    id: {
+    club_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      allowNull: true,
+      references: {
+        model: 'club',
+        key: 'id',
+        unique: true
+      }
     },
-    club: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    members: {
+    members_id: {
       type: DataTypes.INTEGER,
       unique: true,
-      allowNull: false
+      allowNull: true,
+      references: {
+        model: 'member',
+        key: 'id',
+        unique: true
+      }
     }
   },
   {

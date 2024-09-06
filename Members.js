@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Book extends Model { }
+class Member extends Model { }
 
-Book.init(
+Member.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,24 +13,23 @@ Book.init(
     },
     name: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    genre: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    ISBN: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        len: [8, 50]
+      }
     },
   },
   {
@@ -38,8 +37,8 @@ Book.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'book'
+    modelName: 'member'
   }
 );
 
-module.exports = Book;
+module.exports = Member;

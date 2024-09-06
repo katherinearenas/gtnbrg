@@ -10,6 +10,9 @@ Book.belongsToMany(Club, {
     model: Library,
     unique: false
   },
+  as: 'reading_list',
+  foreignKey: 'book_id',
+  otherKey: 'club_id'
 
 });
 
@@ -18,10 +21,16 @@ Club.belongsToMany(Book, {
     model: Library,
     unique: false
   },
+  as: 'books_in_club',
+  foreignKey: 'club_id',
+  otherKey: 'book_id'
 });
 
-Club.hasOne(Member, {
+Club.belongsTo(Member, {
+  foreignKey: 'hostId',
+  as: 'Host'
 });
+
 
 Club.belongsToMany(Member, {
   through: {

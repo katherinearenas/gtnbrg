@@ -17,8 +17,8 @@ Club.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    host: {
 
+    host: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,

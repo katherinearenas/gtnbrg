@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Spine Tinglers",
+    "host": "1",
+    "description": "horror and thriller books"
+  },
+  {
+    "name": "Quick Reads",
+    "host": "2",
+    "description": "books you could finish in one sitting"
+  }
+]

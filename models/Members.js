@@ -31,16 +31,6 @@ Member.init(
         len: [8, 50]
       }
     },
-    collection: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-
-
-    memberships: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    }
   },
   {
     sequelize,

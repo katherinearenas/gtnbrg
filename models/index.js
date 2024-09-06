@@ -20,7 +20,7 @@ Club.belongsToMany(Book, {
 });
 
 Club.hasOne(Member, {
-  as: 'host'
+
 })
 
 Club.belongsToMany(Member, {

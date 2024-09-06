@@ -13,32 +13,29 @@ document.addEventListener('DOMContentLoaded', () => {
       password: document.getElementById('password').value
     };
 
-    fetch('api/signup', {
+    fetch('/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.sucess) {
-            window.location.href = '/login'
-        } else {
-            displayErrors(data.errors);
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
+        return response.json();
+      })
+      .then(data => {
+          if (data.success) {
+            window.location.href = '/login';
+          } else {
+              displayErrors(data.errors);
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
     });
-  });
-
-  function displayErrors(errors) {
-    // Function to display error messages
-    const errorElement = document.createElement('div');
-    errorElement.className = 'alert alert-danger';
-    errorElement.textContent = errors.join(', '); // Assuming errors is an array of messages
-    signupForm.prepend(errorElement);
-    }
     
 });

@@ -26,7 +26,12 @@ Book.init(
     description: {
       type: DataTypes.TEXT,
       allowNull: false
-    }
+    },
+    ISBN: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
   },
   {
     sequelize,

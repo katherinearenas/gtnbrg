@@ -29,11 +29,6 @@ Club.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-
-    members_list: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    }
   },
   {
     sequelize,

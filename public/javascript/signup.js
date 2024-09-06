@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = {
       // eslint-disable-next-line no-undef
       username: document.getElementById('username').value,
-      email: document.getElementById(email).value,
+      email: document.getElementById('email').value,
       password: document.getElementById('password').value
     };
 

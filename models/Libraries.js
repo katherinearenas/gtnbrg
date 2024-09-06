@@ -1,26 +1,30 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Location model
 class Library extends Model {}
 
-// create fields/columns for Location model
 Library.init(
   {
-    id: {
+    club_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      references: {
+        model: 'club',
+        key: 'id',
+        unique: true
+
+      }
     },
-    owner: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    books: {
+    books_id: {
       type: DataTypes.INTEGER,
       unique: true,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'book',
+        key: 'id',
+        unique: true
+
+      }
     }
   },
   {

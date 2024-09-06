@@ -5,28 +5,25 @@ const Library = require('./Libraries');
 const Memberlist = require('./Memberlists');
 
 Book.belongsToMany(Club, {
-
   through: {
     model: Library,
     unique: false
   },
-
-
   as: 'reading_list'
 });
 
-Club.haveMany(Book, {
+Club.belongsToMany(Book, {
   through: {
     model: Library,
     unique: false
   },
 });
 
-Club.haveOne(Member, {
+Club.hasOne(Member, {
   as: 'host'
 })
 
-Club.haveMany(Member, {
+Club.belongsToMany(Member, {
   through: {
     model: Memberlist,
     unique: false

@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { Member } = require('../../models');
 
-// GET all users
 router.get('/', async (req, res) => {
   try {
     const memberData = await Member.findAll();
@@ -11,7 +11,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a user
+router.get('/signup', (req, res) => {
+  res.render('signup', { layout: false, title: 'Sign Up' });
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const memberData = await Member.findByPk(req.params.id, {
@@ -30,7 +33,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// CREATE a user
 router.post('/', async (req, res) => {
   try {
     const memberData = await Member.create(req.body);
@@ -40,8 +42,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-
-// DELETE a user
 router.delete('/:id', async (req, res) => {
   try {
     const memberData = await Member.destroy({
@@ -58,6 +58,24 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json(memberData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post('/signup', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await Member.create({
+      username,
+      email,
+      password: hashedPassword
+    });
+    res.redirect('/login');
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error signing up');
   }
 });
 

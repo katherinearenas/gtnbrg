@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // turn on routes
 app.use(routes);
 app.use('/', memberRoutes);
-app.use('/api', clubRoutes);
+app.use('/api/clubs', clubRoutes);
 
 sequelize.sync({ force: false }).then(() => {
   // eslint-disable-next-line no-console

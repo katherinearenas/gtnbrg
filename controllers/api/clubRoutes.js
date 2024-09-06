@@ -4,7 +4,7 @@ const { Club } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const clubData = await Club.findAll();
-    
+
     console.log('Clubs data:', clubData);
 
     res.render('clubs', { clubs: clubData });
@@ -14,23 +14,44 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get club by id
-
 router.get('/:id', async (req, res) => {
   try {
-    const clubData = await Club.findByPk(req.params.id, {
-    });
+    const club = await Club.findByPk(req.params.id);
 
-    if (!clubData) {
+    if (!club) {
       res.status(404).json({ message: 'No club found with this id!' });
       return;
     }
 
-    res.status(200).json(clubData);
+    res.render('club', { club });
+
   } catch (err) {
+    console.error('Error fetching club:', err);
     res.status(500).json(err);
   }
 });
+
+// POST route for allowing a user to join an existing club
+router.post('/join/:clubId', async (req, res) => {
+  try {
+    const { clubId } = req.params;
+    const memberId = req.session.memberId;
+
+    const existingEntry = await MemberList.findOne({
+      where: { club_id: clubId, members_id: memberId }
+    });
+
+    if (existingEntry) {
+      return res.status(400).send('Member already in club');
+    }
+
+    const join = await MemberList.create({ club_id: clubId, members_id: memberId });
+    res.json({ success: true, message: "Successfully joined the club!" });
+  } catch (error) {
+    console.error('Error joining club:', error);
+    res.status(500).send('Error joining club');
+  }
+})
 
 // CREATE a club
 router.post('/', async (req, res) => {

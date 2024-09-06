@@ -1,11 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Location model
-class Memberist extends Model {}
+class Memberlist extends Model {}
 
-// create fields/columns for Location model
-Memberist.init(
+Memberlist.init(
   {
     club_id: {
       type: DataTypes.INTEGER,
@@ -36,4 +34,4 @@ Memberist.init(
   }
 );
 
-module.exports = Memberist;
+module.exports = Memberlist;

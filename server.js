@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const routes = require('./controllers');
+const memberRoutes = require('./controllers/api/memberRoutes')
 const sequelize = require('./config/connection');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // turn on routes
 app.use(routes);
+app.use('/', memberRoutes);
 
 sequelize.sync({ force: false }).then(() => {
   // eslint-disable-next-line no-console

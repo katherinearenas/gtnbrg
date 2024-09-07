@@ -15,6 +15,53 @@ router.get('/signup', (req, res) => {
   res.render('signup', { layout: false, title: 'Sign Up' });
 });
 
+router.get('/login', (req, res) => {
+  try {
+      res.render('login');  // Ensure 'login' view exists in your views directory
+  } catch (error) {
+      console.error('Error rendering login page:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const member = await Member.findOne({
+      where: {
+        email
+      }
+    });
+
+    if (!member) {
+      res.status(401).json({
+        message: 'User not found.'
+      });
+      return;
+    }
+
+    const isValid = await bcrypt.compare(password, member.password);
+
+    if (!isValid) {
+      res.status(401).json({
+        message: 'Incorrect password.'
+      });
+      return;
+    }
+
+    req.session.memberId = member.id;
+    req.session.loggedIn = true;
+
+    res.redirect('/');
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      message: 'Internal server error'
+    })
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const memberData = await Member.findByPk(req.params.id, {

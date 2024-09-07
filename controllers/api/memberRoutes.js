@@ -15,6 +15,27 @@ router.get('/signup', (req, res) => {
   res.render('signup', { layout: false, title: 'Sign Up' });
 });
 
+router.post('/signup', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newMember = await Member.create({
+      name: username,
+      email,
+      password: hashedPassword
+    });
+    res.json({ success: true, message: 'Signup successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+      error: error.message
+    });
+  }
+});
+
 router.get('/login', (req, res) => {
   try {
       res.render('login');  // Ensure 'login' view exists in your views directory
@@ -105,27 +126,6 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json(memberData);
   } catch (err) {
     res.status(500).json(err);
-  }
-});
-
-router.post('/signup', async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newMember = await Member.create({
-      name: username,
-      email,
-      password: hashedPassword
-    });
-    res.json({ success: true, message: 'Signup successful' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal Server Error',
-      error: error.message
-    });
   }
 });
 

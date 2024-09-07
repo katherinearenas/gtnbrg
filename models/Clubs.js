@@ -20,7 +20,7 @@ Club.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Members',
+        model: 'member',
         key: 'id',
       }
     },

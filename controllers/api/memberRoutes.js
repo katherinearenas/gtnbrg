@@ -129,22 +129,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await Member.create({
-      username,
-      email,
-      password: hashedPassword
-    });
-    res.redirect('/login');
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('Error signing up');
-  }
-});
-
 module.exports = router;

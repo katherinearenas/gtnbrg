@@ -49,4 +49,4 @@ Member.belongsToMany(Club, {
 });
 
 
-module.exports = { Book, Club, Member, Library };
+module.exports = { Book, Club, Member, Library, Memberlist };

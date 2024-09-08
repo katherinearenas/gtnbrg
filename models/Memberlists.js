@@ -5,6 +5,12 @@ class Memberlist extends Model {}
 
 Memberlist.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     club_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -14,7 +20,7 @@ Memberlist.init(
         unique: true
       }
     },
-    members_id: {
+    member_id: {
       type: DataTypes.INTEGER,
       unique: true,
       allowNull: true,
@@ -30,7 +36,7 @@ Memberlist.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'memberslist'
+    modelName: 'memberlist'
   }
 );
 

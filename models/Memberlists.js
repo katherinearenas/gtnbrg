@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Memberist extends Model {}
+class Memberlist extends Model {}
 
-Memberist.init(
+Memberlist.init(
   {
     club_id: {
       type: DataTypes.INTEGER,
@@ -34,4 +34,4 @@ Memberist.init(
   }
 );
 
-module.exports = Memberist;
+module.exports = Memberlist;

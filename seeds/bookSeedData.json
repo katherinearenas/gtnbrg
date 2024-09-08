@@ -2,30 +2,35 @@
   {
     "name": "House of Leaves",
     "author": "Mark Z. Danielewski",
+    "ISBN": "9780375703768",
     "genre": "Ergodic Horror",
     "description": "A story about a young man who finds a manuscript about a family's documentary, The Navidson Record, which details their experiences with a strange house. The young man becomes all encompassed with the text and story, which alters the course of his own life."
   },
   {
     "name": "You",
     "author": "Caroline Kepnes",
+    "ISBN": "9781476785608",
     "genre": "Psychological Horror",
     "description": "Guinevere Beck, an aspiring writer, is employed as a teaching assistant while simultaneously working on her thesis. When she strides into the East Village bookstore where Joe Goldberg works, he is instantly enamored with her. Beck is everything that Joe thinks he has ever wanted: gorgeous, tough, razor-smart. But there is more to Goldberg than Beck realizes, and much more to Beck than her oh-so-perfect facade. Their mutual obsession quickly spirals into a whirlwind of deadly consequences."
   },
   {
     "name": "The Invention of Sound",
     "author": "Chuck Palahniuk",
+    "ISBN": "9781538717981",
     "genre": "Thriller",
     "description": "Gates Foster lost his daughter, Lucy, seventeen years ago. He's never stopped searching. Suddenly, a shocking new development provides Foster with his first major lead in over a decade, and he may finally be on the verge of discovering the awful truth."
   },
   {
-    "name": "Recursion",
+    "name": "Recursion: A Novel",
     "author": "Blake Crouch",
+    "ISBN": "9781524759797",
     "genre": "Sci-Fi",
     "description": "At first, it looks like a disease. An epidemic that spreads through no known means, driving its victims mad with memories of a life they never lived. But the force that’s sweeping the world is no pathogen. It’s just the first shock wave, unleashed by a stunning discovery—and what’s in jeopardy is not our minds but the very fabric of time itself. In New York City, Detective Barry Sutton is closing in on the truth—and in a remote laboratory, neuroscientist Helena Smith is unaware that she alone holds the key to this mystery . . . and the tools for fighting back. Together, Barry and Helena will have to confront their enemy—before they, and the world, are trapped in a loop of ever-growing chaos."
   },
   {
     "name": "The Phantom Tollbooth",
     "author": "Norton Juster",
+    "ISBN": "9780394815008",
     "genre": "Children's Fantasy",
     "description": "For Milo, everything’s a bore. When a tollbooth mysteriously appears in his room, he drives through only because he’s got nothing better to do. But on the other side, things seem different. Milo visits the Island of Conclusions (you get there by jumping), learns about time from a ticking watchdog named Tock, and even embarks on a quest to rescue Rhyme and Reason. Somewhere along the way, Milo realizes something astonishing. Life is far from dull. In fact, it’s exciting beyond his wildest dreams!"
   }

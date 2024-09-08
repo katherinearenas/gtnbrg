@@ -15,14 +15,13 @@ Club.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+
     host: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
       references: {
         model: 'member',
         key: 'id',
-        unique: true
       }
     },
     description: {

@@ -5,12 +5,22 @@ const routes = require('./controllers');
 const clubRoutes = require('./controllers/api/memberRoutes')
 const memberRoutes = require('./controllers/api/memberRoutes')
 const sequelize = require('./config/connection');
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: 'auto'
+  }
+}));
 
 app.engine('handlebars', exphbs.engine({ 
   runtimeOptions: {

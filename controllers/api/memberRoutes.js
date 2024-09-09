@@ -73,6 +73,7 @@ router.post('/login', async (req, res) => {
     
    
     req.session.memberId = member.id;
+    req.session.memberName = member.name;
     req.session.loggedIn = true;
 
     res.redirect('/');

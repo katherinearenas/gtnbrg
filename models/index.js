@@ -26,12 +26,6 @@ Club.belongsToMany(Book, {
   otherKey: 'book_id'
 });
 
-Club.belongsTo(Member, {
-  foreignKey: 'host',
-  as: 'Host'
-});
-
-
 Club.belongsToMany(Member, {
   through: {
     model: Memberlist,
@@ -49,4 +43,4 @@ Member.belongsToMany(Club, {
 });
 
 
-module.exports = { Book, Club, Member, Library };
+module.exports = { Book, Club, Member, Library, Memberlist };

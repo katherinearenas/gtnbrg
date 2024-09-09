@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Club } = require('../../models');
+const { Club, Memberlist, Member} = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -36,16 +36,14 @@ router.post('/join/:clubId', async (req, res) => {
   try {
     const { clubId } = req.params;
     const memberId = req.session.memberId;
-
-    const existingEntry = await MemberList.findOne({
-      where: { club_id: clubId, members_id: memberId }
+    const existingEntry = await Memberlist.findOne({
+      where: { club_id: clubId, member_id: memberId }
     });
-
     if (existingEntry) {
       return res.status(400).send('Member already in club');
     }
-
-    const join = await MemberList.create({ club_id: clubId, members_id: memberId });
+    const join = await Memberlist.create({ club_id: clubId, members_id: memberId });
+    console.log(join);
     res.json({ success: true, message: "Successfully joined the club!" });
   } catch (error) {
     console.error('Error joining club:', error);

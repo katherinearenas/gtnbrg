@@ -25,9 +25,9 @@ router.post('/signup', async (req, res) => {
       email,
       password: hashedPassword
     });
-    res.json({ success: true, message: 'Signup successful' });
+    res.redirect('/login');
   } catch (error) {
-    console.error(error);
+    console.error('Error signing up', error);
     res.status(500).json({
       success: false,
       message: 'Internal Server Error',

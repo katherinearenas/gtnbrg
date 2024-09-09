@@ -27,10 +27,13 @@ Book.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-    ISBN: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+    host_of: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'club',
+        key: 'id',
+      }
     },
   },
   {

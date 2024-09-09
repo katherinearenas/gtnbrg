@@ -26,9 +26,14 @@ Club.belongsToMany(Book, {
   otherKey: 'book_id'
 });
 
-Club.belongsTo(Member, {
-  foreignKey: 'host',
-  as: 'Host'
+Club.hasOne(Member, {
+  foreignKey: 'member_id',
+  as: 'host'
+});
+
+Member.hasOne(Club, {
+  foreignKey: 'club_id',
+  as: 'host_of'
 });
 
 

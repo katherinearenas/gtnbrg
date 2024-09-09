@@ -45,14 +45,14 @@ router.post('/join/:clubId', async (req, res) => {
       return res.status(400).send('Member already in club');
     }
 
-    const join = await Memberlist.create({ club_id: clubId, members_id: memberId });
+    const join = await Memberlist.create({ club_id: clubId, member_id: memberId });
     console.log(join);
     res.json({ success: true, message: "Successfully joined the club!" });
   } catch (error) {
     console.error('Error joining club:', error);
     res.status(500).send('Error joining club');
   }
-})
+});
 
 // CREATE a club
 router.post('/', async (req, res) => {

@@ -36,7 +36,7 @@ Memberlist.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'memberslist'
+    modelName: 'memberlist'
   }
 );
 

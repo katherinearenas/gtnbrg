@@ -25,9 +25,9 @@ router.post('/signup', async (req, res) => {
       email,
       password: hashedPassword
     });
-    res.json({ success: true, message: 'Signup successful' });
+    res.redirect('/login');
   } catch (error) {
-    console.error(error);
+    console.error('Error signing up', error);
     res.status(500).json({
       success: false,
       message: 'Internal Server Error',
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 
     if (!member) {
       res.status(401).json({
-        message: 'User not found.'
+        message: 'Incorrect email or password.'
       });
       return;
     }
@@ -66,15 +66,17 @@ router.post('/login', async (req, res) => {
 
     if (!isValid) {
       res.status(401).json({
-        message: 'Incorrect password.'
+        message: 'Incorrect email or password.'
       });
       return;
     }
-
+    
+   
     req.session.memberId = member.id;
     req.session.loggedIn = true;
 
     res.redirect('/');
+    
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({

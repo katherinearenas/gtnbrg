@@ -27,26 +27,31 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const club = await Club.findByPk(req.params.id);
-    const clubMembers = await Memberlist.findAll({
-      where: { club_id: club.id }
+    const club = await Club.findByPk(req.params.id, {
+      include: [{
+        model: Member,
+        as: 'members'
+      }]
     });
-    const clubBooks = await Library.findAll({
-      where: { club_id: club.id }
-    });
-
+    
     if (!club) {
       res.status(404).json({ message: 'No club found with this id!' });
       return;
     }
 
-    res.render('club', {
-      club,
-      clubMembers: clubMembers[0],
-      clubBooks: clubBooks[0]
+    const isMember = await Memberlist.findOne({
+      where: {
+        club_id: req.params.id,
+        member_id: req.session.memberId
+      }
     });
-    console.log(clubMembers);
-    console.log('NEED club id', clubBooks);
+
+    res.render('club', { 
+      club: club.toJSON(),
+      isMember: !!isMember,
+      clubMembers: club.members
+     });
+
   } catch (err) {
     console.error('Error fetching club:', err);
     res.status(500).json(err);
@@ -60,21 +65,23 @@ router.post('/join/:clubId', async (req, res) => {
     const memberId = req.session.memberId;
 
     const existingEntry = await Memberlist.findOne({
-      where: { club_id: clubId, member_id: memberId }
+      where: { 
+        club_id: clubId, 
+        member_id: memberId 
+      }
     });
 
     if (existingEntry) {
       return res.status(400).send('Member already in club');
     }
 
-    const join = await Memberlist.create({
-      club_id: clubId,
-      member_id: memberId
-    });
-    console.log(join);
+    await Memberlist.create({ club_id: clubId, member_id: memberId });
+
     res.json({ success: true, message: 'Successfully joined the club!' });
+    
   } catch (error) {
     console.error('Error joining club:', error);
+
     res.status(500).send('Error joining club');
   }
 });

@@ -34,6 +34,11 @@ Member.hasOne(Club, {
   as: 'host_of'
 });
 
+Club.belongsTo(Member, {
+  foreignKey: 'host',
+  as: 'hostDetails'
+})
+
 Club.belongsToMany(Member, {
   through: {
     model: Memberlist,

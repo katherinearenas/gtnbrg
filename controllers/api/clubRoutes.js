@@ -40,9 +40,13 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
-    res.render('club', { club, clubMembers, clubBooks });
+    res.render('club', {
+      club,
+      clubMembers: clubMembers[0],
+      clubBooks: clubBooks[0]
+    });
     console.log(clubMembers);
-    console.log(clubBooks);
+    console.log('NEED club id', clubBooks);
   } catch (err) {
     console.error('Error fetching club:', err);
     res.status(500).json(err);
@@ -84,8 +88,7 @@ router.post('/new', async (req, res) => {
       host: req.session.memberId
     });
 
-    res.redirect(`/api/clubs/${newClub.id}`)
-
+    res.redirect(`/api/clubs/${newClub.id}`);
   } catch (error) {
     console.error('Failed to create club:', error);
     res.status(500).send('Error creating club');

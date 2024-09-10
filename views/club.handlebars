@@ -28,10 +28,13 @@
         search Libraries DB for all books matching club ID
         pull matching book ids from book db
          --}}
-        <h1>Library:{{clubBooks}}</h1>
+        <h1>Library:{{clubBooks.id}}</h1>
     </div>
     <div class="container mt-5">
-        <h1>Members:{{clubMembers}}</h1>
+        <h1>Members:</h1>
+        {{#each clubMembers}}
+        <li>{{clubMembers.id}}</li>
+        {{/each}}
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

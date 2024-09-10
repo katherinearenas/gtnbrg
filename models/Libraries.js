@@ -5,6 +5,12 @@ class Library extends Model {}
 
 Library.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     club_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -29,7 +35,7 @@ Library.init(
   },
   {
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'library'

@@ -27,14 +27,7 @@ Book.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-    host_of: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'club',
-        key: 'id',
-      }
-    },
+    
   },
   {
     sequelize,

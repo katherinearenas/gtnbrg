@@ -23,6 +23,12 @@ app.use(session({
   }
 }));
 
+app.use((req, res, next) => {
+  res.locals.loggedIn = req.session.loggedIn;
+  res.locals.memberName = req.session.memberName;
+  next();
+});
+
 app.engine('handlebars', exphbs.engine({ 
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,

@@ -16,56 +16,61 @@
             <p>You are a member of this club.</p>
         {{/unless}}
         <h3>Hosted by: {{club.hostDetails.name}}</h3>
+        {{#if isHost}}
+            <button id="setBookBtn" class="btn btn-primary mt-3">Set Current Book</button>
+
+            <div id="setBookForm" class="container mt-3" style="display: none;">
+                <h3>Select a Book for your Club to read</h3>
+                <form id="setBookClubForm" action="/api/clubs/{{club.id}}/setBook" method="POST">
+                    <div class="form-group mb-3">
+                        <label for="bookName">Book Name:</label>
+                        <input type="text" class="form-control" id="bookName" name="bookName" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="authorName">Author:</label>
+                        <input type="text" class="form-control" id="authorName" name="authorName" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="genre">Genre:</label>
+                        <input type="text" class="form-control" id="genre" name="genre" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Set Current Book</button>
+                </form>
+            </div>
+        {{/if}}
     </div>  
-     </div>
+
     <div class="container mt-5">
-        {{!-- 
-        find club ID
-        search Libraries DB for most recent book matching that id
-        pull mathcing book id from book db
-         --}}
         <h1>Current book:</h1>
+        {{#if currentBook}}
+            <div class="book-details">
+                <h3>{{currentBook.name}}</h3>
+                <p>Author: {{currentBook.author}}</p>
+                <p>Genre: {{currentBook.genre}}</p>
+                <p>Description: {{currentBook.description}}</p>
+                <img id="bookCover" src="" alt="Book Cover" style="width: 150px; height: 200px;">
+            </div>
+        {{else}}
+            <p>No current book assigned.</p>
+        {{/if}}
         <h2>Discussion on:</h2>
     </div>
     <div class="container mt-5">
-         {{!-- 
-        find club ID
-        search Libraries DB for all books matching club ID
-        pull matching book ids from book db
-         --}}
         <h1>Library:{{clubBooks.id}}</h1>
     </div>
     <div class="container mt-5">
         <h2>Members:</h2>
         <ul>
             {{#each clubMembers}}
-                <li>{{this.name}} ({{this.email}})</li>
+                <li>{{this.name}}</li>
             {{/each}}
         </ul>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const joinButton = document.getElementById('joinClubBtn');
-
-
-            joinButton.addEventListener('click', function () {
-                const clubId = this.getAttribute('data-club-id');
-
-                fetch(`/api/clubs/join/${clubId}`, { method: 'POST' })
-                .then(response => {
-                    if (!response.ok) throw new Error('Failed to join club');
-                    return response.json();
-                })
-                .then(data => {
-                    alert(data.message);  // Show success message
-                })
-                .catch(error => {
-                    console.error('Error joining club:', error);
-                    alert('Error joining club: ' + error.message);
-                });
-            });
-        });
-    </script>
+    <script src="/javascript/club.js"></script>
     
 </body>
 </html>

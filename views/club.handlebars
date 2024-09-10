@@ -10,7 +10,12 @@
     <div class="container mt-5">
         <h1>{{club.name}}</h1>
         <p>{{club.description}}</p>
-        <button id="joinClubBtn" class="btn btn-success" data-club-id="{{club.id}}">Join Club</button>
+        <h3>Hosted by: {{club.hostDetails.name}}</h3>
+        {{#unless isMember}}
+            <button id="joinClubBtn" class="btn btn-success" data-club-id="{{club.id}}">Join Club</button>
+        {{else}}
+            <p>You are a member of this club.</p>
+        {{/unless}}
     </div>  
     <script>
         document.addEventListener('DOMContentLoaded', function () {

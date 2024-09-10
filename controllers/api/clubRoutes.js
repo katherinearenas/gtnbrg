@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Club, Memberlist, Member } = require('../../models');
+const { Club, Memberlist, Member, Library } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -10,7 +10,9 @@ router.get('/', async (req, res) => {
     res.render('clubs', { clubs: clubData });
   } catch (err) {
     console.error('Error fetching clubs:', err);
-    res.status(500).json({ message: 'Failed to fetch clubs', error: err.message });
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch clubs', error: err.message });
   }
 });
 
@@ -96,8 +98,7 @@ router.post('/new', async (req, res) => {
       host: req.session.memberId
     });
 
-    res.redirect(`/api/clubs/${newClub.id}`)
-
+    res.redirect(`/api/clubs/${newClub.id}`);
   } catch (error) {
     console.error('Failed to create club:', error);
     res.status(500).send('Error creating club');

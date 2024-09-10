@@ -5,6 +5,12 @@ class Library extends Model {}
 
 Library.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     club_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -15,7 +21,7 @@ Library.init(
 
       }
     },
-    books_id: {
+    book_id: {
       type: DataTypes.INTEGER,
       unique: true,
       allowNull: true,

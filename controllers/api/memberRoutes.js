@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { Member } = require('../../models');
+const { Member, Memberlist } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -85,6 +85,40 @@ router.post('/login', async (req, res) => {
     })
   }
 });
+
+router.get('/profile', (req, res)=> {
+  try {
+    res.render('profile');
+} catch (error) {
+    console.error('Error rendering profile page:', error);
+    res.status(500).send('Internal Server Error');
+};
+});
+router.get('/', async (req, res) => {
+  try {
+    const memberId = req.session.memberId;
+    const memberClubs = await Memberlist.findAll({
+      where: { member_id: memberId }
+  })
+    // const profileClubs
+    console.log('Member clubs:', memberClubs)
+    res.render('profile', { clubs: memberClubs });
+  } catch (err) {
+    console.error('Error fetching member clubs:', err);
+    res.status(500).json({ message: 'Failed to fetch member clubs', error: err.message });
+  }}
+);
+
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error('Logout error:', error);
+      return res.status(500).send('Error Logging out');
+    }
+    res.redirect('/login');
+  })
+})
 
 router.get('/:id', async (req, res) => {
   try {

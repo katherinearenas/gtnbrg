@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Club, Memberlist, Member } = require('../../models');
+const { Club, Memberlist, Member, Library } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -10,21 +10,30 @@ router.get('/', async (req, res) => {
     res.render('clubs', { clubs: clubData });
   } catch (err) {
     console.error('Error fetching clubs:', err);
-    res.status(500).json({ message: 'Failed to fetch clubs', error: err.message });
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch clubs', error: err.message });
   }
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const club = await Club.findByPk(req.params.id);
+    const clubMembers = await Memberlist.findAll({
+      where: { club_id: club.id }
+    });
+    const clubBooks = await Library.findAll({
+      where: { club_id: club.id }
+    });
 
     if (!club) {
       res.status(404).json({ message: 'No club found with this id!' });
       return;
     }
 
-    res.render('club', { club });
-
+    res.render('club', { club, clubMembers, clubBooks });
+    console.log(clubMembers);
+    console.log(clubBooks);
   } catch (err) {
     console.error('Error fetching club:', err);
     res.status(500).json(err);
@@ -45,9 +54,12 @@ router.post('/join/:clubId', async (req, res) => {
       return res.status(400).send('Member already in club');
     }
 
-    const join = await Memberlist.create({ club_id: clubId, member_id: memberId });
+    const join = await Memberlist.create({
+      club_id: clubId,
+      member_id: memberId
+    });
     console.log(join);
-    res.json({ success: true, message: "Successfully joined the club!" });
+    res.json({ success: true, message: 'Successfully joined the club!' });
   } catch (error) {
     console.error('Error joining club:', error);
     res.status(500).send('Error joining club');

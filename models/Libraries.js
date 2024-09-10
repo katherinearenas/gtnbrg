@@ -15,7 +15,7 @@ Library.init(
 
       }
     },
-    books_id: {
+    book_id: {
       type: DataTypes.INTEGER,
       unique: true,
       allowNull: true,
@@ -29,7 +29,7 @@ Library.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'library'

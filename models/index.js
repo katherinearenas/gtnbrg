@@ -28,12 +28,16 @@ Club.belongsToMany(Book, {
 
 Club.hasOne(Member, {
   foreignKey: 'member_id',
-  as: 'host'
+  as: 'host',
+  allowNull: false,
+
 });
 
 Member.hasOne(Club, {
   foreignKey: 'club_id',
-  as: 'host_of'
+  as: 'host_of',
+  allowNull: true,
+  
 });
 
 
@@ -41,16 +45,20 @@ Club.belongsToMany(Member, {
   through: {
     model: Memberlist,
     unique: false
-
-}
+},
+as: 'members', 
+foreignKey: 'club_id', 
+otherKey: 'member_id'
 });
 
 Member.belongsToMany(Club, {
   through: {
     model: Memberlist,
     unique: false
-
-}
+},
+as: 'clubs', 
+foreignKey: 'member_id', 
+otherKey: 'club_id'
 });
 
 

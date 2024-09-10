@@ -16,6 +16,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/new', (req, res) => {
+  try {
+    res.render('createClub');
+  } catch (error) {
+    console.error('Error displaying the new club form:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const club = await Club.findByPk(req.params.id);
@@ -67,12 +76,19 @@ router.post('/join/:clubId', async (req, res) => {
 });
 
 // CREATE a club
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
-    const clubData = await Club.create(req.body);
-    res.status(200).json(clubData);
-  } catch (err) {
-    res.status(400).json(err);
+    const newClub = await Club.create({
+      name: req.body.name,
+      description: req.body.description,
+      host: req.session.memberId
+    });
+
+    res.redirect(`/api/clubs/${newClub.id}`)
+
+  } catch (error) {
+    console.error('Failed to create club:', error);
+    res.status(500).send('Error creating club');
   }
 });
 

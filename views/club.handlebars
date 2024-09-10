@@ -10,12 +10,12 @@
     <div class="container mt-5">
         <h1>{{club.name}}</h1>
         <p>{{club.description}}</p>
-        <h3>Hosted by: {{club.hostDetails.name}}</h3>
         {{#unless isMember}}
             <button id="joinClubBtn" class="btn btn-success" data-club-id="{{club.id}}">Join Club</button>
         {{else}}
             <p>You are a member of this club.</p>
         {{/unless}}
+        <h3>Hosted by: {{club.hostDetails.name}}</h3>
     </div>  
      </div>
     <div class="container mt-5">
@@ -36,16 +36,21 @@
         <h1>Library:{{clubBooks.id}}</h1>
     </div>
     <div class="container mt-5">
-        <h1>Members:</h1>
-        {{#each clubMembers}}
-        <li>{{clubMembers.id}}</li>
-        {{/each}}
+        <h2>Members:</h2>
+        <ul>
+            {{#each clubMembers}}
+                <li>{{this.name}} ({{this.email}})</li>
+            {{/each}}
+        </ul>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const joinButton = document.getElementById('joinClubBtn');
+
+
             joinButton.addEventListener('click', function () {
                 const clubId = this.getAttribute('data-club-id');
+
                 fetch(`/api/clubs/join/${clubId}`, { method: 'POST' })
                 .then(response => {
                     if (!response.ok) throw new Error('Failed to join club');

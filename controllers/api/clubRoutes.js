@@ -30,9 +30,14 @@ router.get('/:id', async (req, res) => {
     const club = await Club.findByPk(req.params.id, {
       include: [{
         model: Member,
-        as: 'hostDetails'
+        as: 'members'
       }]
     });
+    
+    if (!club) {
+      res.status(404).json({ message: 'No club found with this id!' });
+      return;
+    }
 
     const isMember = await Memberlist.findOne({
       where: {
@@ -41,14 +46,10 @@ router.get('/:id', async (req, res) => {
       }
     });
 
-    if (!club) {
-      res.status(404).json({ message: 'No club found with this id!' });
-      return;
-    }
-
     res.render('club', { 
       club: club.toJSON(),
-      isMember: !!isMember
+      isMember: !!isMember,
+      clubMembers: club.members
      });
 
   } catch (err) {
@@ -66,22 +67,18 @@ router.post('/join/:clubId', async (req, res) => {
     const existingEntry = await Memberlist.findOne({
       where: { 
         club_id: clubId, 
-        member_id: memberId }
+        member_id: memberId 
+      }
     });
 
     if (existingEntry) {
       return res.status(400).send('Member already in club');
     }
 
-    const join = await Memberlist.create({ club_id: clubId, member_id: memberId });
+    await Memberlist.create({ club_id: clubId, member_id: memberId });
 
-    await Memberlist.create({ club_id: clubId, member_id: memberId })
-
-    res.json({
-      success: true, message: 'Succussfully joined club.'
-    });
-
-    res.redirect(`/api/clubs/${clubId}`);
+    res.json({ success: true, message: 'Successfully joined the club!' });
+    
   } catch (error) {
     console.error('Error joining club:', error);
 

@@ -25,12 +25,12 @@ Club.belongsToMany(Book, {
 });
 
 Club.hasOne(Member, {
-  foreignKey: 'member_id',
+  foreignKey: 'id',
   as: 'host'
 });
 
 Member.hasOne(Club, {
-  foreignKey: 'club_id',
+  foreignKey: 'id',
   as: 'host_of'
 });
 

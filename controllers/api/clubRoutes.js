@@ -28,6 +28,25 @@ router.get('/new', (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const club = await Club.findByPk(req.params.id, {
+      include: [
+        {
+          model: Member,
+          as: 'members',
+          attributes: ['name']
+        },
+        {
+          model: Member,
+          as: 'hostDetails',
+          attributes: ['name']
+        },
+        {
+          model: Book,
+          as: 'books_in_club',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
       include: [{
         model: Member,
         as: 'members'
@@ -43,6 +62,10 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
+    const currentBook = club.books_in_club.length ? club.books_in_club[0] : null;
+
+    const isHost = club.host === req.session.memberId;
+
     const isMember = await Memberlist.findOne({
       where: {
         club_id: req.params.id,
@@ -53,6 +76,11 @@ router.get('/:id', async (req, res) => {
     res.render('club', {
       club: club.toJSON(),
       isMember: !!isMember,
+      clubMembers: club.members,
+      currentBook,
+      clubBooks: club.books_in_club,
+      isHost
+     });
       clubMembers: club.members,
       clubBooks: club.books_in_club
     });
@@ -106,6 +134,41 @@ router.post('/new', async (req, res) => {
     res.status(500).send('Error creating club');
   }
 });
+
+router.post('/:id/setBook', async (req, res) => {
+  try {
+    const { bookName, authorName, genre, description } = req.body;
+
+    const club = await Club.findByPk(req.params.id);
+
+    if (club.host !== req.session.memberId) {
+      return res.status(403).json({
+        message: 'Only host can choose book.'
+      });
+    }
+
+    const [book, created] = await Book.findOrCreate({
+      where: { name: bookName},
+      defaults: {
+        author: authorName,
+        genre,
+        description,
+      }
+    });
+
+    await Library.create({
+      club_id: club.id,
+      book_id: book.id,
+    })
+
+    res.redirect(`/api/clubs/${club.id}`)
+  } catch (error) {
+    console.error("Error setting book:", error);
+    res.status(500).json({
+      message: 'Failed to set book'
+    });
+  }
+})
 
 // DELETE a club
 router.delete('/:id', async (req, res) => {

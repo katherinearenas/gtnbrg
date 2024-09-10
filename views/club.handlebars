@@ -12,6 +12,30 @@
         <p>{{club.description}}</p>
         <button id="joinClubBtn" class="btn btn-success" data-club-id="{{club.id}}">Join Club</button>
     </div>  
+     </div>
+    <div class="container mt-5">
+        {{!-- 
+        find club ID
+        search Libraries DB for most recent book matching that id
+        pull mathcing book id from book db
+         --}}
+        <h1>Current book:</h1>
+        <h2>Discussion on:</h2>
+    </div>
+    <div class="container mt-5">
+         {{!-- 
+        find club ID
+        search Libraries DB for all books matching club ID
+        pull matching book ids from book db
+         --}}
+        <h1>Library:{{clubBooks.id}}</h1>
+    </div>
+    <div class="container mt-5">
+        <h1>Members:</h1>
+        {{#each clubMembers}}
+        <li>{{clubMembers.id}}</li>
+        {{/each}}
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const joinButton = document.getElementById('joinClubBtn');

@@ -9,6 +9,11 @@
 <body>     
     <div class="container mt-5">
         <h1 class="mb-4">Join a Club!</h1>
+        {{#if loggedIn}}
+            <div class="mb-3">
+            <a href="/api/clubs/new" class="btn btn-primary">Create a Book Club</a>
+        </div>
+        {{/if}}
         <div id="clubsList" class="row">
             {{#each clubs}}
             <div class="col-md-6">

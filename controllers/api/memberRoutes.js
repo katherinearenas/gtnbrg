@@ -86,6 +86,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.get('/logout', (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error('Logout error:', error);
+      return res.status(500).send('Error Logging out');
+    }
+    res.redirect('/login');
+  })
+})
+
 router.get('/:id', async (req, res) => {
   try {
     const memberData = await Member.findByPk(req.params.id, {

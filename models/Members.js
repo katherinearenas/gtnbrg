@@ -30,6 +30,14 @@ Member.init(
         len: [50, 255]
       }
     },
+    // host_of: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: 'club',
+    //     key: 'id',
+    //   }
+    // },
   },
   {
     sequelize,

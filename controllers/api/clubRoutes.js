@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Club, Memberlist, Member } = require('../../models');
+const { Club, Memberlist, Member, Library } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -10,21 +10,43 @@ router.get('/', async (req, res) => {
     res.render('clubs', { clubs: clubData });
   } catch (err) {
     console.error('Error fetching clubs:', err);
-    res.status(500).json({ message: 'Failed to fetch clubs', error: err.message });
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch clubs', error: err.message });
+  }
+});
+
+router.get('/new', (req, res) => {
+  try {
+    res.render('createClub');
+  } catch (error) {
+    console.error('Error displaying the new club form:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const club = await Club.findByPk(req.params.id);
+    const clubMembers = await Memberlist.findAll({
+      where: { club_id: club.id }
+    });
+    const clubBooks = await Library.findAll({
+      where: { club_id: club.id }
+    });
 
     if (!club) {
       res.status(404).json({ message: 'No club found with this id!' });
       return;
     }
 
-    res.render('club', { club });
-
+    res.render('club', {
+      club,
+      clubMembers: clubMembers[0],
+      clubBooks: clubBooks[0]
+    });
+    console.log(clubMembers);
+    console.log('NEED club id', clubBooks);
   } catch (err) {
     console.error('Error fetching club:', err);
     res.status(500).json(err);
@@ -45,9 +67,12 @@ router.post('/join/:clubId', async (req, res) => {
       return res.status(400).send('Member already in club');
     }
 
-    const join = await Memberlist.create({ club_id: clubId, member_id: memberId });
+    const join = await Memberlist.create({
+      club_id: clubId,
+      member_id: memberId
+    });
     console.log(join);
-    res.json({ success: true, message: "Successfully joined the club!" });
+    res.json({ success: true, message: 'Successfully joined the club!' });
   } catch (error) {
     console.error('Error joining club:', error);
     res.status(500).send('Error joining club');
@@ -55,12 +80,18 @@ router.post('/join/:clubId', async (req, res) => {
 });
 
 // CREATE a club
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
-    const clubData = await Club.create(req.body);
-    res.status(200).json(clubData);
-  } catch (err) {
-    res.status(400).json(err);
+    const newClub = await Club.create({
+      name: req.body.name,
+      description: req.body.description,
+      host: req.session.memberId
+    });
+
+    res.redirect(`/api/clubs/${newClub.id}`);
+  } catch (error) {
+    console.error('Failed to create club:', error);
+    res.status(500).send('Error creating club');
   }
 });
 

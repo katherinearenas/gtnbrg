@@ -2,11 +2,10 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const routes = require('./controllers');
-const clubRoutes = require('./controllers/api/memberRoutes')
+const clubRoutes = require('./controllers/api/clubRoutes')
 const memberRoutes = require('./controllers/api/memberRoutes')
 const sequelize = require('./config/connection');
 const session = require('express-session');
-
 
 const app = express();
 const PORT = process.env.PORT || 3001;

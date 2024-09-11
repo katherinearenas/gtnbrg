@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">BookClub</a>
+    <img class="navbar-brand" style="max-width: 6%;" src="images/logo.png">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,9 +28,9 @@
       {{#if loggedIn}}
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
-            <span class="navbar-text mr-3">
+            <a class="navbar-link" href="/profile">
               Welcome, {{memberName}}
-            </span>
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>

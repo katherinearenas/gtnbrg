@@ -75,6 +75,7 @@ router.get('/:id', async (req, res) => {
       clubBooks: club.books_in_club,
       isHost
     });
+     });
 
   } catch (err) {
     console.error('Error fetching club:', err);

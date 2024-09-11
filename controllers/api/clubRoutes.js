@@ -46,15 +46,7 @@ router.get('/:id', async (req, res) => {
             attributes: [],
           },
         },
-      ],
-      include: [{
-        model: Member,
-        as: 'members'
-      },
-      {
-        model: Book,
-        as: 'books_in_club'
-      }]
+      ]
     });
 
     if (!club) {
@@ -63,6 +55,8 @@ router.get('/:id', async (req, res) => {
     }
 
     const currentBook = club.books_in_club.length ? club.books_in_club[0] : null;
+
+    console.log('Club data:', club);
 
     const isHost = club.host === req.session.memberId;
 
@@ -80,9 +74,6 @@ router.get('/:id', async (req, res) => {
       currentBook,
       clubBooks: club.books_in_club,
       isHost
-     });
-      clubMembers: club.members,
-      clubBooks: club.books_in_club
     });
 
   } catch (err) {

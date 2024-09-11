@@ -1,33 +1,32 @@
 const sequelize = require('../config/connection');
-const { Club, Book, Member } = require('../models');
+const { Club, Book, Member, Library, Memberlist } = require('../models');
 
 const bookSeedData = require('./bookSeedData.json');
 const clubSeedData = require('./clubSeedData.json');
 const memberSeedData = require('./memberSeedData.json');
+const librarySeedData = require('./librarySeedData.json');
+const memberListSeedData = require('./memberListSeedData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
+  console.log('Database synced successfully!');
 
   const books = await Book.bulkCreate(bookSeedData);
+  console.log('Books seeded successfully!');
 
   const members = await Member.bulkCreate(memberSeedData);
+  console.log('Members seeded successfully!');
 
   const clubs = await Club.bulkCreate(clubSeedData);
+  console.log('Clubs seeded successfully!');
 
-  return(members, books, clubs);
-}
+  const libraries = await Library.bulkCreate(librarySeedData);
+  console.log('Clubs seeded successfully!');
 
-  // // Create trips at random
-  // for (let i = 0; i < 10; i++) {
-  //   // Get a random traveller's `id`
-  //   const { id: randomMemberId } = members[
-  //     Math.floor(Math.random() * members.length)
-  //   ];
+  const memberLists = await Memberlist.bulkCreate(memberListSeedData);
+  console.log('Members seeded successfully!');
 
-  //   // Get a random location's `id`
-  //   const { id: randomBookId } = books[
-  //     Math.floor(Math.random() * books.length)
-  //   ]};
-
+  return members, books, clubs, libraries, memberLists;
+};
 
 seedDatabase();

@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{member.name}}!</h2>
+  </div>
+</div>
+
+  <div class="container mt-5">
+        <h2>your clubs:</h2>
+        <ul>
+            {{#each clubs}}
+                <a href='/api/clubs/{{this.id}}'>{{this.name}}</a>
+                <br></br>
+            {{/each}}
+        </ul>
+    </div>

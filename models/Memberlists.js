@@ -1,14 +1,19 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Location model
-class Memberist extends Model {}
+class Memberlist extends Model {}
 
-// create fields/columns for Location model
-Memberist.init(
+Memberlist.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     club_id: {
       type: DataTypes.INTEGER,
+      unique:false,
       allowNull: true,
       references: {
         model: 'club',
@@ -16,9 +21,9 @@ Memberist.init(
         unique: true
       }
     },
-    members_id: {
+    member_id: {
       type: DataTypes.INTEGER,
-      unique: true,
+      unique: false,
       allowNull: true,
       references: {
         model: 'member',
@@ -32,8 +37,8 @@ Memberist.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'memberslist'
+    modelName: 'memberlist'
   }
 );
 
-module.exports = Memberist;
+module.exports = Memberlist;

@@ -1,10 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Traveller model
 class Club extends Model {}
 
-// create fields/columns for Traveller model
 Club.init(
   {
     id: {
@@ -17,22 +15,14 @@ Club.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    host: {
-
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
-      references: {
-        model: 'member',
-        key: 'id',
-        unique: true
-
-      }
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    discussionDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
   },
   {
     sequelize,

@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Member extends Model { }
+class Member extends Model {}
 
 Member.init(
   {
@@ -27,10 +27,17 @@ Member.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlphanumeric: true,
-        len: [8, 50]
+        len: [50, 255]
       }
     },
+    // host_of: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: 'club',
+    //     key: 'id',
+    //   }
+    // },
   },
   {
     sequelize,

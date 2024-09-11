@@ -47,14 +47,6 @@ router.get('/:id', async (req, res) => {
           },
         },
       ],
-      include: [{
-        model: Member,
-        as: 'members'
-      },
-      {
-        model: Book,
-        as: 'books_in_club'
-      }]
     });
 
     if (!club) {
@@ -81,9 +73,6 @@ router.get('/:id', async (req, res) => {
       clubBooks: club.books_in_club,
       isHost
      });
-      clubMembers: club.members,
-      clubBooks: club.books_in_club
-    });
 
   } catch (err) {
     console.error('Error fetching club:', err);

@@ -6,6 +6,9 @@
 DROP DATABASE IF EXISTS bookclub_db;
 CREATE DATABASE bookclub_db;
 \c bookclub_db;
+
+SELECT * FROM "club";
+
 -- CREATE TABLE book (  
 -- );
 -- CREATE TABLE library(

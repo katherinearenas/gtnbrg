@@ -46,7 +46,7 @@ app.use(routes);
 app.use('/', memberRoutes);
 app.use('/api/clubs', clubRoutes);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false, alter: true }).then(() => {
   // eslint-disable-next-line no-console
   app.listen(PORT, () => console.log('Now listening'));
 });

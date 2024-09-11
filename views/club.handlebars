@@ -60,7 +60,26 @@
         {{else}}
             <p>No current book assigned.</p>
         {{/if}}
-        <h3>Discussion on: {{club.discussionDate}}</h3>
+        {{#if isHost}}
+            <div class="container mt-5">
+                <h3>Set a Discussion Date</h3>
+                <form id="discussionForm" action="/api/clubs/{{club.id}}/discussion" method="POST">
+                    <div class="form-group mb-3">
+                        <label for="date">Discussion Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Set Date</button>
+                </form>
+            </div>
+        {{/if}}
+        <div class="container mt-5">
+            <h2>Discussion Date:</h2>
+            {{#if club.discussionDate}}
+                <p>{{club.discussionDate}}</p>
+            {{else}}
+                <p>No discussion date set yet.</p>
+            {{/if}}
+        </div>
     </div>
     <div class="container mt-5">
 

@@ -75,8 +75,6 @@ router.get('/:id', async (req, res) => {
       clubBooks: club.books_in_club,
       isHost
     });
-     });
-
   } catch (err) {
     console.error('Error fetching club:', err);
     res.status(500).json(err);
@@ -108,6 +106,29 @@ router.post('/join/:clubId', async (req, res) => {
     console.error('Error joining club:', error);
 
     res.status(500).send('Error joining club');
+  }
+});
+
+router.post('/:id/discussion', async (req, res) => {
+  try {
+    const club = await Club.findByPk(req.params.id);
+
+    if (club.host !== req.session.memberId) {
+      return res.status(403).json({
+        message: 'Only the host can add a discussion date.',
+      });
+    }
+
+    await club.update({
+      discussionDate: req.body.date,
+    })
+
+    res.redirect(`/api/clubs/${req.params.id}`);
+  } catch (error) {
+    console.error('Error setting a discussion date:', error);
+    res.status(500).json({
+      message: 'Failed to set discussion date.'
+    });
   }
 });
 

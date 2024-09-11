@@ -46,7 +46,8 @@ router.get('/:id', async (req, res) => {
             attributes: [],
           },
         },
-      ],
+      ]
+
     });
 
     if (!club) {
@@ -55,6 +56,8 @@ router.get('/:id', async (req, res) => {
     }
 
     const currentBook = club.books_in_club.length ? club.books_in_club[0] : null;
+
+    console.log('Club data:', club);
 
     const isHost = club.host === req.session.memberId;
 
@@ -72,7 +75,8 @@ router.get('/:id', async (req, res) => {
       currentBook,
       clubBooks: club.books_in_club,
       isHost
-     });
+    });
+
 
   } catch (err) {
     console.error('Error fetching club:', err);

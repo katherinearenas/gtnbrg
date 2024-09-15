@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     res.redirect('/login')
   }
   });
-}
+
 router.get('/new', (req, res) => {
   try {
     res.render('createClub');

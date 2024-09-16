@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const joinButton = document.getElementById('joinClubBtn');
     const setBookBtn = document.getElementById('setBookBtn');
     const setBookForm = document.getElementById('setBookForm');
+    const setDiscussionDateBtn = document.getElementById('setDiscussionDateBtn');
+    const setDiscussionForm = document.getElementById('setDiscussionForm');
+    const discussionDatetime = document.getElementById('discussionDatetime');
 
     if (joinButton) { 
         joinButton.addEventListener('click', function () {
@@ -70,5 +73,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching book cover:', error);
                 document.getElementById('bookCover').src = '/images/default-cover.jpg'
             })
+    }
+
+    if (setDiscussionDateBtn) {
+        setDiscussionDateBtn.addEventListener('click', function () {
+            setDiscussionForm.style.display = 'block';
+        })
+    };
+
+    if (discussionDatetime) {
+        flatpickr(discussionDatetime, {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i'
+        })
     }
 });

@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                alert(data.message);  // Show success message
+                joinButton.textContent = 'You are a member of this club';
+                joinButton.classList.remove('btn-sucess');
+                joinButton.classList.add('btn-secondary');
+                joinButton.disabled = true;
             })
             .catch(error => {
                 console.error('Error joining club:', error);

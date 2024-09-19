@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { Member, Memberlist, Club } = require('../models');
-// const withAuth = require('../utils/auth');
+const { Member, Club } = require('../models');
+const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
     res.render('home');
   });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
    try {
     const member = await Member.findByPk(req.session.memberId, {
       include: [

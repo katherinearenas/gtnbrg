@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { Club, Memberlist, Member, Library, Book } = require('../../models');
+const withAuth = require('../../utils/auth')
 
-router.get('/', async (req, res) => {
-  if (req.session.memberId) {
+router.get('/', withAuth, async (req, res) => {
+  
     try {
       const clubData = await Club.findAll();
   
@@ -15,9 +16,6 @@ router.get('/', async (req, res) => {
         .status(500)
         .json({ message: 'Failed to fetch clubs', error: err.message });
     }
-  } else {
-    res.redirect('/login')
-  }
   });
 
 router.get('/new', (req, res) => {

@@ -6,6 +6,10 @@ router.get('/', (req, res) => {
     res.render('home');
   });
 
+  router.get('/about', (req, res) => {
+    res.render('about');
+  });
+
 router.get('/profile', withAuth, async (req, res) => {
    try {
     const member = await Member.findByPk(req.session.memberId, {

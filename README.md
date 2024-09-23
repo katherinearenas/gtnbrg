@@ -30,24 +30,21 @@ Users are able to sign up and log in to GTNBRG. Users can join book clubs that a
 
 This project is deployed using render at [https://gtnbrg.onrender.com/](https://gtnbrg.onrender.com/)
 
-This is a screenshot of the home page before login:
-![homescreenshot](assets/images/readmescreenshots/homescreenshot.png)
+This is a screenshot of the home page:
+![homepagescreenshot](readmescreenshots/homepage.png)
 
-This is a screenshot of the home page after login:
-![homescreenshot](assets/images/readmescreenshots/homescreenshot.png)
+This is a screenshot of the about page:
+![aboutscreenshot](readmescreenshots/about.png)
 
-This is a screenshot of the login page:
-![randomrecipescreenshot](assets/images/readmescreenshots/randomrecipescreenshot.png)
-
-This is a screenshot of the clubs:
-![holidaycreenshot](assets/images/readmescreenshots/holidaycalscreenshot.png)
+This is a screenshot of the clubs page:
+![clubsscreenshot](readmescreenshots/clubspage.png)
 
 This is a screenshot of an individual club page:
-![holidayscreenshot](assets/images/readmescreenshots/featuredrecipescreenshot.png)
+![clubcreenshot](readmescreenshots/exampleClubPage.png)
 
-This is a screenshot of the create a club form:
-![searchscreenshot](assets/images/readmescreenshots/Searchscreenshot.png)
+This is a screenshot of another individual club page after a user has joined the club:
+![joinclubscreenshot](readmescreenshots/joiningaclub.png)
 
 This is a screenshot of the profile page:
-
+![profilescreenshot](readmescreenshots/profile.png)
 

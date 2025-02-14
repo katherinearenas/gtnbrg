@@ -28,7 +28,7 @@ Users are able to sign up and log in to GTNBRG. Users can join book clubs that a
 <strong>Notes:</strong>
 
 
-This project is deployed using render at [https://gtnbrg.onrender.com/](https://gtnbrg.onrender.com/)
+This project is deployed using render at [https://gtnbrg.onrender.com/](https://gtnbrg-083z.onrender.com/)
 
 This is a screenshot of the home page:
 ![homepagescreenshot](readmescreenshots/homepage.png)
